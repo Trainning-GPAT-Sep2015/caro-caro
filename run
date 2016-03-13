@@ -1,0 +1,7 @@
+docker volume create --name caro-data
+
+docker run --name carodb -d -p 8080:8080 -p 28015:28015 -p 29015:29015 -v caro-data:/data --name caro-data rethinkdb:latest rethinkdb --bind all
+
+docker run --name caroapi --rm -p 3030:3030 --link=carodb -e API_ADDR="0.0.0.0" -e RETHINKDB_ADDR=carodb -e RETHINKDB_PORT="28015" khiem/caro-server
+
+docker run --name caroclient -d -p 3000:3000 khiem/caro-client

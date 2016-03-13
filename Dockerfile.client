@@ -5,6 +5,6 @@ MAINTAINER khiem
 COPY ./package.json /caro/
 WORKDIR /caro
 RUN npm install
-COPY . /caro
+COPY . /caro/
 CMD make run-client-dev
 EXPOSE 3000
